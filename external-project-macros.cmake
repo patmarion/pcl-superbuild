@@ -262,6 +262,7 @@ macro(crosscompile_pcl tag)
       -DBUILD_SHARED_LIBS:BOOL=OFF
       -DPCL_SHARED_LIBS:BOOL=OFF
       -DBUILD_visualization:BOOL=OFF
+      -DBUILD_examples:BOOL=OFF
       -DEIGEN_INCLUDE_DIR=${install_prefix}/eigen
       -DFLANN_INCLUDE_DIR=${install_prefix}/flann-${tag}/include
       -DFLANN_LIBRARY=${install_prefix}/flann-${tag}/lib/libflann_cpp_s.a
