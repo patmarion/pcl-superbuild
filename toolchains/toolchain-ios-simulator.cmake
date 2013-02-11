@@ -31,7 +31,7 @@ set(possible_sdk_roots
   /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs
   )
 foreach(sdk_root ${possible_sdk_roots})
-  foreach(sdk iPhoneSimulator4.3.sdk iPhoneSimulator5.0.sdk iPhoneSimulator5.1.sdk iPhoneSimulator6.0.sdk)
+  foreach(sdk iPhoneSimulator4.3.sdk iPhoneSimulator5.0.sdk iPhoneSimulator5.1.sdk iPhoneSimulator6.0.sdk iPhoneSimulator6.1.sdk)
     if (EXISTS ${sdk_root}/${sdk} AND IS_DIRECTORY ${sdk_root}/${sdk})
       set(CMAKE_OSX_SYSROOT ${sdk_root}/${sdk})
     endif()
