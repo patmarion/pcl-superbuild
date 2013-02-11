@@ -272,3 +272,12 @@ macro(crosscompile_pcl tag)
 
   force_build(${proj})
 endmacro()
+
+
+macro(create_pcl_framework)
+    add_custom_target(pclFramework ALL
+      COMMAND ${CMAKE_SOURCE_DIR}/makeFramework.sh pcl
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      DEPENDS pcl-ios-device pcl-ios-simulator
+      COMMENT "Creating pcl.framework")
+endmacro()

@@ -36,3 +36,7 @@ foreach(tag ${tags})
   crosscompile_pcl(${tag})
   crosscompile_ves(${tag})
 endforeach()
+
+if (BUILD_IOS_DEVICE AND BUILD_IOS_SIMULATOR)
+  create_pcl_framework()
+endif()
