@@ -46,7 +46,7 @@ macro(fetch_vtk)
     vtk-fetch
     SOURCE_DIR ${source_prefix}/vtk
     GIT_REPOSITORY git://github.com/patmarion/VTK.git
-    GIT_TAG origin/kiwi-fixes
+    GIT_TAG ce4a267
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
@@ -106,7 +106,7 @@ macro(fetch_ves)
     ves-fetch
     SOURCE_DIR ${source_prefix}/ves
     GIT_REPOSITORY git://vtk.org/VES.git
-    GIT_TAG origin/next
+    GIT_TAG 77c0a4a
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""

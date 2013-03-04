@@ -14,6 +14,7 @@ set(vtk_module_defaults
   -DModule_vtkFiltersSources:BOOL=ON
   -DModule_vtkFiltersGeometry:BOOL=ON
   -DModule_vtkIOGeometry:BOOL=ON
+  -DModule_vtkIOLegacy:BOOL=ON
   -DModule_vtkIOXML:BOOL=ON
   -DModule_vtkIOImage:BOOL=ON
   -DModule_vtkIOPLY:BOOL=ON
