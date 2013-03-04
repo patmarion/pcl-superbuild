@@ -278,6 +278,6 @@ macro(create_pcl_framework)
     add_custom_target(pclFramework ALL
       COMMAND ${CMAKE_SOURCE_DIR}/makeFramework.sh pcl
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-      DEPENDS pcl-ios-device pcl-ios-simulator
+      DEPENDS pcl-ios-device
       COMMENT "Creating pcl.framework")
 endmacro()
