@@ -148,8 +148,8 @@ macro(fetch_flann)
   ExternalProject_Add(
     flann-fetch
     SOURCE_DIR ${source_prefix}/flann
-    GIT_REPOSITORY git://github.com/patmarion/flann.git
-    GIT_TAG origin/android-tag
+    GIT_REPOSITORY git://github.com/gcasey/flann.git
+    GIT_TAG origin/master
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
@@ -172,7 +172,7 @@ macro(crosscompile_flann tag)
       -DCMAKE_BUILD_TYPE:STRING=${build_type}
       -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${toolchain_file}
      # -DBUILD_SHARED_LIBS:BOOL=OFF
-      -DBUILD_TESTING:BOOL=OFF
+      -DBUILD_EXAMPLES:BOOL=OFF
       -DBUILD_PYTHON_BINDINGS:BOOL=OFF
       -DBUILD_MATLAB_BINDINGS:BOOL=OFF
   )
