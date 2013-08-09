@@ -97,50 +97,6 @@ macro(crosscompile_vtk tag)
   )
 endmacro()
 
-
-#
-# VES fetch
-#
-macro(fetch_ves)
-  ExternalProject_Add(
-    ves-fetch
-    SOURCE_DIR ${source_prefix}/ves
-    GIT_REPOSITORY git://vtk.org/VES.git
-    GIT_TAG 77c0a4a
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-  )
-endmacro()
-
-#
-# VES crosscompile
-#
-macro(crosscompile_ves tag)
-  set(proj ves-${tag})
-  get_toolchain_file(${tag})
-  ExternalProject_Add(
-    ${proj}
-    SOURCE_DIR ${source_prefix}/ves
-    DOWNLOAD_COMMAND ""
-    DEPENDS ves-fetch vtk-${tag} eigen
-    CMAKE_ARGS
-      -DCMAKE_INSTALL_PREFIX:PATH=${install_prefix}/${proj}
-      -DCMAKE_BUILD_TYPE:STRING=${build_type}
-      -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${toolchain_file}
-      -DCMAKE_CXX_FLAGS:STRING=${VES_CXX_FLAGS}
-      -DBUILD_SHARED_LIBS:BOOL=OFF
-      -DVES_USE_VTK:BOOL=ON
-      -DVES_NO_SUPERBUILD:BOOL=ON
-      -DVTK_DIR:PATH=${build_prefix}/vtk-${tag}
-      -DEIGEN_INCLUDE_DIR:PATH=${install_prefix}/eigen
-      -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
-  )
-
-  force_build(${proj})
-endmacro()
-
-
 #
 # FLANN fetch
 #
@@ -148,8 +104,8 @@ macro(fetch_flann)
   ExternalProject_Add(
     flann-fetch
     SOURCE_DIR ${source_prefix}/flann
-    GIT_REPOSITORY git://github.com/patmarion/flann.git
-    GIT_TAG origin/android-tag
+    GIT_REPOSITORY git://github.com/mariusmuja/flann
+    GIT_TAG cee08ec38a8df7bc70397f10a4d30b9b33518bb4
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
@@ -172,7 +128,7 @@ macro(crosscompile_flann tag)
       -DCMAKE_BUILD_TYPE:STRING=${build_type}
       -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${toolchain_file}
      # -DBUILD_SHARED_LIBS:BOOL=OFF
-      -DBUILD_TESTING:BOOL=OFF
+      -DBUILD_EXAMPLES:BOOL=OFF
       -DBUILD_PYTHON_BINDINGS:BOOL=OFF
       -DBUILD_MATLAB_BINDINGS:BOOL=OFF
   )
@@ -279,6 +235,6 @@ macro(create_pcl_framework)
     add_custom_target(pclFramework ALL
       COMMAND ${CMAKE_SOURCE_DIR}/makeFramework.sh pcl
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-      DEPENDS pcl-ios-device
+      DEPENDS pcl-ios-device pcl-ios-simulator
       COMMENT "Creating pcl.framework")
 endmacro()

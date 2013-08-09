@@ -15,16 +15,16 @@ make_pcl_framework ()
 
   pcl_header_dir=$install/pcl-ios-device/include/pcl-1.6
 
-  pcl_framework=$install/pcl-ios-device/framework/pcl.framework
+  pcl_framework=$install/frameworks/pcl.framework
   mkdir -p $pcl_framework
   rm -rf $pcl_framework/*
   mkdir $pcl_framework/Headers
   cp -r $pcl_header_dir/* $pcl_framework/Headers/
 
   libtool -static -o $pcl_framework/pcl_device $pcl_device_libs
-  #libtool -static -o $pcl_framework/pcl_sim $pcl_sim_libs
-  #lipo -create $pcl_framework/pcl_device $pcl_framework/pcl_sim -output $pcl_framework/pcl
-  lipo -create $pcl_framework/pcl_device -output $pcl_framework/pcl
+  libtool -static -o $pcl_framework/pcl_sim $pcl_sim_libs
+  lipo -create $pcl_framework/pcl_device $pcl_framework/pcl_sim -output $pcl_framework/pcl
+  #lipo -create $pcl_framework/pcl_device -output $pcl_framework/pcl
   rm $pcl_framework/pcl_*
 }
 
