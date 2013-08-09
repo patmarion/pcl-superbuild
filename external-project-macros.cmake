@@ -97,50 +97,6 @@ macro(crosscompile_vtk tag)
   )
 endmacro()
 
-
-#
-# VES fetch
-#
-macro(fetch_ves)
-  ExternalProject_Add(
-    ves-fetch
-    SOURCE_DIR ${source_prefix}/ves
-    GIT_REPOSITORY git://vtk.org/VES.git
-    GIT_TAG 77c0a4a
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-  )
-endmacro()
-
-#
-# VES crosscompile
-#
-macro(crosscompile_ves tag)
-  set(proj ves-${tag})
-  get_toolchain_file(${tag})
-  ExternalProject_Add(
-    ${proj}
-    SOURCE_DIR ${source_prefix}/ves
-    DOWNLOAD_COMMAND ""
-    DEPENDS ves-fetch vtk-${tag} eigen
-    CMAKE_ARGS
-      -DCMAKE_INSTALL_PREFIX:PATH=${install_prefix}/${proj}
-      -DCMAKE_BUILD_TYPE:STRING=${build_type}
-      -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${toolchain_file}
-      -DCMAKE_CXX_FLAGS:STRING=${VES_CXX_FLAGS}
-      -DBUILD_SHARED_LIBS:BOOL=OFF
-      -DVES_USE_VTK:BOOL=ON
-      -DVES_NO_SUPERBUILD:BOOL=ON
-      -DVTK_DIR:PATH=${build_prefix}/vtk-${tag}
-      -DEIGEN_INCLUDE_DIR:PATH=${install_prefix}/eigen
-      -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
-  )
-
-  force_build(${proj})
-endmacro()
-
-
 #
 # FLANN fetch
 #
