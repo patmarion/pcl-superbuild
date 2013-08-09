@@ -148,8 +148,8 @@ macro(fetch_flann)
   ExternalProject_Add(
     flann-fetch
     SOURCE_DIR ${source_prefix}/flann
-    GIT_REPOSITORY git://github.com/gcasey/flann.git
-    GIT_TAG origin/master
+    GIT_REPOSITORY git://github.com/mariusmuja/flann
+    GIT_TAG cee08ec38a8df7bc70397f10a4d30b9b33518bb4
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
