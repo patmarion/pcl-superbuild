@@ -115,6 +115,28 @@ endmacro()
 #
 # FLANN crosscompile
 #
+macro(compile_flann)
+  set(proj flann-host)
+  ExternalProject_Add(
+    ${proj}
+    SOURCE_DIR ${source_prefix}/flann
+    DOWNLOAD_COMMAND ""
+    DEPENDS flann-fetch
+    CMAKE_ARGS
+      -DCMAKE_INSTALL_PREFIX:PATH=${install_prefix}/${proj}
+      -DCMAKE_BUILD_TYPE:STRING=${build_type}
+     # -DBUILD_SHARED_LIBS:BOOL=OFF
+      -DBUILD_EXAMPLES:BOOL=OFF
+      -DBUILD_PYTHON_BINDINGS:BOOL=OFF
+      -DBUILD_MATLAB_BINDINGS:BOOL=OFF
+  )
+
+  force_build(${proj})
+endmacro()
+
+#
+# FLANN crosscompile
+#
 macro(crosscompile_flann tag)
   set(proj flann-${tag})
   get_toolchain_file(${tag})
@@ -155,6 +177,26 @@ endmacro()
 #
 # Boost crosscompile
 #
+macro(compile_boost)
+  set(proj boost-host)
+
+  ExternalProject_Add(
+    ${proj}
+    SOURCE_DIR ${source_prefix}/boost
+    DOWNLOAD_COMMAND ""
+    DEPENDS boost-fetch
+    CMAKE_ARGS
+      -DCMAKE_INSTALL_PREFIX:PATH=${install_prefix}/${proj}
+      -DCMAKE_BUILD_TYPE:STRING=${build_type}
+      -DBUILD_SHARED_LIBS:BOOL=OFF
+  )
+
+  force_build(${proj})
+endmacro()
+
+#
+# Boost crosscompile
+#
 macro(crosscompile_boost tag)
 
 
@@ -189,6 +231,35 @@ macro(fetch_pcl)
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
   )
+endmacro()
+
+#
+# PCL crosscompile
+#
+macro(compile_pcl)
+  set(proj pcl-host)
+
+  ExternalProject_Add(
+    ${proj}
+    SOURCE_DIR ${source_prefix}/pcl
+    DOWNLOAD_COMMAND ""
+    DEPENDS pcl-fetch boost-host flann-host eigen
+    CMAKE_ARGS
+      -DCMAKE_INSTALL_PREFIX:PATH=${install_prefix}/${proj}
+      -DCMAKE_BUILD_TYPE:STRING=${build_type}
+      -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${toolchain_file}
+      -DBUILD_SHARED_LIBS:BOOL=OFF
+      -DPCL_SHARED_LIBS:BOOL=OFF
+      -DBUILD_visualization:BOOL=OFF
+      -DBUILD_examples:BOOL=OFF
+      -DEIGEN_INCLUDE_DIR=${install_prefix}/eigen
+      -DFLANN_INCLUDE_DIR=${install_prefix}/flann-host/include
+      -DFLANN_LIBRARY=${install_prefix}/flann-host/lib/libflann_cpp_s.a
+      -DBOOST_ROOT=${install_prefix}/boost-host
+      -C ${try_run_results_file}
+  )
+
+  force_build(${proj})
 endmacro()
 
 #

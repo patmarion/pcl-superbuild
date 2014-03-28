@@ -29,7 +29,7 @@ set(vtk_module_defaults
 option(BUILD_ANDROID "Build for Android" ON)
 option(BUILD_IOS_DEVICE "Build for iOS device" ON)
 option(BUILD_IOS_SIMULATOR "Build for iOS simulator" OFF)
-
+option(BUILD_HOST "Build for host" ON)
 
 set(toolchain_dir ${CMAKE_SOURCE_DIR}/toolchains)
 set(toolchain_ios_simulator ${toolchain_dir}/toolchain-ios-simulator.cmake)
