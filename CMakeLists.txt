@@ -18,6 +18,13 @@ compile_vtk()
 
 set(tags)
 
+if(BUILD_HOST)
+  compile_boost()
+  compile_flann()
+  compile_pcl()
+endif()
+
+
 if(BUILD_ANDROID)
  list(APPEND tags android)
 endif()
